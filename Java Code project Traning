@@ -1,0 +1,84 @@
+package org.example;
+import org.openqa.selenium.JavascriptExecutor;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+
+public class Main {
+    public static void main(String[] args) throws InterruptedException {
+
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demo.nopcommerce.com/");
+        Thread.sleep(1000);
+        //Register Test
+        driver.findElement(By.className("ico-register")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("gender-male")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("FirstName")).sendKeys("mohammad");
+        Thread.sleep(1000);
+        driver.findElement(By.id("LastName")).sendKeys("Alawneh");
+        Thread.sleep(1000);
+        Select day = new Select(driver.findElement(By.name("DateOfBirthDay")));
+        day.selectByVisibleText("27");
+        driver.findElement(By.name("DateOfBirthMonth")).sendKeys("September");
+        driver.findElement(By.name("DateOfBirthYear")).sendKeys("1997");
+        Thread.sleep(1000);
+        driver.findElement(By.id("Email")).sendKeys("Mohammadalawneh@yahoo.com");
+        Thread.sleep(1000);
+        driver.findElement(By.id("Company")).sendKeys("N.A");
+        Thread.sleep(1000);
+        driver.findElement(By.id("Newsletter")).click();
+        Thread.sleep(1000);
+        driver.findElement(By.id("Password")).sendKeys("1234@#!");
+        driver.findElement(By.id("ConfirmPassword")).sendKeys("1234@#!");
+        Thread.sleep(1000);
+        driver.findElement(By.id("register-button")).click();
+        //Login Test
+        driver.findElement(By.className("ico-login")).click();
+        driver.findElement(By.id("Email")).sendKeys("Mohammadalawneh@yahoo.com");
+        driver.findElement(By.id("Password")).sendKeys("1234@#!");
+        driver.findElement(By.id("RememberMe")).click();
+        driver.findElement(By.cssSelector(".button-1.login-button")).click();
+        //check product information
+        driver.findElement(By.cssSelector(".button-2.product-box-add-to-cart-button")).click();
+        Thread.sleep(1000);
+        driver.navigate().back();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        Thread.sleep(1000);
+        js.executeScript("window.scrollBy(0, -500);");
+        Thread.sleep(1000);
+        driver.findElement(By.linkText("Apple MacBook Pro 13-inch")).click();
+        Thread.sleep(1000);
+        driver.navigate().back();
+        Thread.sleep(1000);
+        js.executeScript("window.scrollBy(0, -500);");
+        Thread.sleep(1000);
+        driver.findElement(By.linkText("HTC One M8 Android L 5.0 Lollipop")).click();
+        Thread.sleep(1000);
+        driver.navigate().back();
+        Thread.sleep(1000);
+        js.executeScript("window.scrollBy(0, -500);");
+        Thread.sleep(1000);
+        driver.findElement(By.linkText("$25 Virtual Gift Card")).click();
+        driver.navigate().back();
+        Thread.sleep(1000);
+        js.executeScript("window.scrollBy(0, -1100);");
+        Thread.sleep(1000);
+        //logout
+        driver.findElement(By.className("ico-logout")).click();
+        driver.close();
+
+
+
+
+
+    }
+
+}
